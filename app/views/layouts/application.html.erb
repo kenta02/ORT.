@@ -98,7 +98,7 @@
 
     <!-- コンテンツ -->
     <%= yield %>
-
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= render partial: 'popup_100days_of_code' %>
 
     <!-- フッター -->
