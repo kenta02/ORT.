@@ -8,7 +8,7 @@ Rails.application.routes.draw do
 
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks',
                                     registrations: 'users/registrations' }
-
+  # FIXME resourcesに変えたい
   get "posts/about" => "posts#about"
   get "posts/new" => "posts#new"
   post "posts/create" => "posts#create"
@@ -26,4 +26,7 @@ Rails.application.routes.draw do
 
   get "users/mypage" => "users#show", as: "user_root"
 
+  namespace :api, format: 'json' do
+    resources :counter, only: [:index, :update]
+  end
 end
