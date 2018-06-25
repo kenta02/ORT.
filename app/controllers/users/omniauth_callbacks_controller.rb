@@ -28,6 +28,8 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   #   super(scope)
   # end
 
+  skip_before_action :move_to_about
+
   def facebook
     callback_from :facebook
   end
@@ -47,6 +49,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     if @user.persisted?
       flash[:notice] = I18n.t('devise.omniauth_callbacks.success', kind: provider.capitalize)
       sign_in_and_redirect @user, event: :authentication
+      # redirect_to user_root
     else
       session["devise.#{provider}_data"] = request.env['omniauth.auth']
       redirect_to("/")
